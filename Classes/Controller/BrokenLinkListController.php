@@ -331,7 +331,13 @@ class BrokenLinkListController extends AbstractBrofixController
         $this->moduleTemplate->assign('isAdmin', $this->getBackendUser()->isAdmin());
 
         // Add flash message if selected depth is not allowed
-        if (!$this->getBackendUser()->isAdmin() && $this->depth > $this->configuration->getRecheckButton() && $this->configuration->getRecheckButton() !== 9999 && $this->configuration->getRecheckButton() !== -1) {
+        // Show message if user is not admin, selected depth is greater than allowed depth,
+        // and the recheckButton value is not set to always allow (9999) or the specific hide case (-1).
+        if (!$this->getBackendUser()->isAdmin() &&
+            $this->depth > $this->configuration->getRecheckButton() &&
+            $this->configuration->getRecheckButton() < 9999 &&
+            $this->configuration->getRecheckButton() !== -1
+        ) {
             $this->createFlashMessage(
                 $this->getLanguageService()->sL('LLL:EXT:brofix/Resources/Private/Language/locallang.xlf:flashmessage.depth_not_allowed'),
                 '',
