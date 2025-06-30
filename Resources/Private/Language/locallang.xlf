@@ -132,6 +132,10 @@
 			<trans-unit id="and_check_links" resname="and_check_links">
 				<source>and check links</source>
 			</trans-unit>
+			<trans-unit id="flashmessage.depth_not_allowed" resname="flashmessage.depth_not_allowed">
+				<source>The depth you choose for checking links is not possible, the "Check links" button will be removed</source>
+				<target state="translated" xml:lang="fr">Le niveau de profondeur sélectionné n'est pas permis. Le bouton de vérification sera retiré.</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

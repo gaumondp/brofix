@@ -329,6 +329,15 @@ class BrokenLinkListController extends AbstractBrofixController
             $this->getBackendUser()->isAdmin() || $this->depth <= $this->configuration->getRecheckButton()
         );
         $this->moduleTemplate->assign('isAdmin', $this->getBackendUser()->isAdmin());
+
+        // Add flash message if selected depth is not allowed
+        if (!$this->getBackendUser()->isAdmin() && $this->depth > $this->configuration->getRecheckButton() && $this->configuration->getRecheckButton() !== 9999 && $this->configuration->getRecheckButton() !== -1) {
+            $this->createFlashMessage(
+                $this->getLanguageService()->sL('LLL:EXT:brofix/Resources/Private/Language/locallang.xlf:flashmessage.depth_not_allowed'),
+                '',
+                ContextualFeedbackSeverity::WARNING
+            );
+        }
     }
 
     /**
